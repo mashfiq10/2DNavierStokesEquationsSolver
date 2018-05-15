@@ -92,16 +92,6 @@ write(20,*)'Title="Transient data set"'
 write(20,*)'variables ="x","y","u","v","p"'
 close(20)
 
-open(20,file="GradPContourPlots.plt")
-write(20,*)'Title="Transient data set"'
-write(20,*)'variables ="x","y","gradpx","gradpy"'
-close(20)
-
-open(20,file="DivergenceCheck.plt")
-write(20,*)'Title="Transient data set"'
-write(20,*)'variables ="k","Divergence"'
-close(20)
-
 open(20,file="LinePlots.plt")
 write(20,*)'Title="Transient data set"'
 write(20,*)'variables ="x","p"'
@@ -341,8 +331,8 @@ end do
    
 do i = 0,nx
   do j = 1,ny-1
-    hxdx(i,j) = (hx2(i+1,j)-hx2(i-1,j))/2d0
-    hydy(i,j) = (hy2(i,j+1)-hy2(i,j-1))/2d0
+    hxdx(i,j) = (hx2(i+1,j)-hx2(i-1,j))/2.0d0
+    hydy(i,j) = (hy2(i,j+1)-hy2(i,j-1))/2.0d0
   end do
     hxdx(i,0)=hxdx(i,1)
     hxdx(i,ny)=hxdx(i,ny-1)
@@ -361,7 +351,6 @@ p2 = p1
 do i = 1,nx-1
   do j = 0,ny
       a = p1(i+1,j)+p2(i-1,j)+p2(i,j-1)+p1(i,j+1)
-     !a = ptemp1(i+1,j)+ptemp1(i-1,j)+ptemp1(i,j-1)+ptemp1(i,j+1)
       b = hxdx(i,j) + hydy(i,j)
       p2(i,j) = a/4-(b*dx)/4
   end do 
