@@ -1,14 +1,14 @@
-2.0d0                               !lx;       length in x -direction
-1.0d0                               !ly;       length in y-direction
-134									!nx; 	    resolution in x direction
-67  								!ny; 	    resolution in y direction
-10000                               !ns;        number of snapshots
+2.0d0               !lx;        length in x -direction
+1.0d0               !ly;        length in y-direction
+134									!nx; 	      resolution in x direction
+67  								!ny; 	      resolution in y direction
+10000               !ns;        number of snapshots
 0.2 								!gamma;	    value of gamma to measure time-step size
-1.0d0                               !rho;       density
-1.0d-2                              !nu;        kinematic viscosity
-1.5                                 !pe
+1.0d0               !rho;       density
+1.0d-2              !nu;        kinematic viscosity
+1.5                 !pe         Peclet number
 40  	 		 					!Tmax; 	    final time
-1.0d-5                              !tol;       tolerance for iterative solvers
-1.0d-3                              !tolt;       tolerance for time
-100                                 !Re;        Reynolds number
-0						     	    !opt; 	    [0]PPE without momentum interpolation, [1]PPE with momentum interpolation
+1.0d-5              !tol;       tolerance for iterative solvers
+1.0d-3              !tolt;       tolerance for time
+100                 !Re;        Reynolds number
+0						     	  !opt; 	    [0]PPE without momentum interpolation, [1]PPE with momentum interpolation
