@@ -16,7 +16,6 @@ common/Reynolds/Re
 common/contol/tol
 common/density/rho
 
-
 open(9,file='project3input.txt')
 read(9,*)lx		    !length in x -direction
 read(9,*)ly	    	!length in y -direction
@@ -34,7 +33,6 @@ read(9,*)Re         !Reynolds number
 read(9,*)opt    	![0]PPE without momentum interpolation, [1]PPE with momentum interpolation
 close(9)     
 
-
 !Calculating grid spacing (spatial)
 dx = lx/dfloat(nx)
 dy = ly/dfloat(ny)
@@ -44,8 +42,6 @@ print*, dy
 !Time step
 !dt = ((dx*dx)*gamma) /nu
 dt = Tmax/dfloat(ns)
-
-
 
 !Initial Condition & Boundary Condition Setup
 allocate(u(0:nx,0:ny))
@@ -69,7 +65,6 @@ do j = 0,ny
 end do
 
 nitr = 0
-
 !IC File Ouput
 open(20,file="InitialCondition.plt")
 write(20,*)'Title="IC Data set"'
@@ -115,7 +110,7 @@ close(20)
 call cpu_time(t1)
 
 !-----------------------------------------------------------------------------!
-!Time integration (for both explicit and implicit solvers)
+!Time integration
 !-----------------------------------------------------------------------------!
 
 tol1 = 1.0d0  
@@ -125,17 +120,12 @@ do while (tol1.gt.tolt)
 call RHS(u,v,hx,hy,nx,ny,dx,dy)
 
 if (opt==0) then
-
 call compact(p,hx,hy,nx,ny,dx,dy,tol)
-
 else 
-
 call momentum(p,u,v,dt,nx,ny,dx,dy,tol,nitr)
-
 end if
 
 call velocity(u,v,p,hx,hy,nx,ny,dx,dy,dt,tol1)
-
 
 !Output .plt file for Tecplot  
 if (mod(nitr,500)==0) then
@@ -151,7 +141,6 @@ write(20,"(a,i8)")'StrandID=0,SolutionTime=',nitr
     end do
   end do
 close(20)
-
 
 open(20,file="LinePlots.plt",position="append")
 write(20,"(a,i8,a)")'Zone I = ',ny+1,',F=POINT'
@@ -191,7 +180,6 @@ open(20,file="mass.plt",position="append")
       write (20,*) dfloat(nitr),m*dy
       write(20,*) ''
 close(20)
-
 end if
 
 end do
@@ -201,7 +189,6 @@ call cpu_time(t2)
 open(4,file='cpu.txt')
 write(4,*)"cpu time (sec)=",(t2-t1)
 close(4)
-
 
 end
 
@@ -296,7 +283,6 @@ do i = 0,nx
 	end do
 end do
 
-
 return
 end
 
@@ -311,7 +297,6 @@ real*8::dy,dx,a,b,tol,err
 real*8,dimension(0:nx,0:ny):: p,hx,hy,hxdx,hydy,hy2,e
 real*8,dimension(0:nx,-1:ny+1)::p2,p1
 real*8,dimension(-1:nx+1,0:ny)::hx2
-
 
 err=1.0d0
   
